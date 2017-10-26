@@ -1,0 +1,33 @@
+version: "2.0"
+services:
+      broker-portal:
+        build: broker-portal/
+        ports:
+          - "8100:8100"
+        restart: always
+        environment:
+           NODE_RED_BASE_URL: "ws://node-red:1880"
+
+      construction-dashboard:
+        build: construction-dashboard/
+        ports:
+          - "6002:6001"
+        restart: always
+        environment:
+           NODE_RED_BASE_URL: "ws://node-red:1880"
+           COMPOSER_BASE_URL: "http://rest:3000"
+
+      county-view:
+        build: county-view/
+        ports:
+          - "6001:6001"
+        restart: always
+        environment:
+           NODE_RED_BASE_URL: "ws://node-red:1880"
+           COMPOSER_BASE_URL: "http://rest:3000"
+
+
+networks:
+  default:
+    external:
+      name: composer_default

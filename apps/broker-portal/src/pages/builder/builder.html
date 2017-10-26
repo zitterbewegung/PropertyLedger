@@ -1,0 +1,160 @@
+<header></header>
+
+<ion-content padding fullscreen>
+  <div class="header-background"></div>
+
+  <ion-card class="margin-card">
+    <h3>Customize</h3>
+    <h2><strong>New Build - </strong> {{car.name}}</h2>
+    <div class="car-details">
+      <p class="opaque">
+
+      </p>
+      <p>
+        $279,900-$349,000
+      </p>
+    </div>
+  </ion-card>
+
+  <ion-card class="animatedCard" [class.expandedCard]="selected === 'trim'">
+    <h3 class="car-option" (click)="open('trim')">
+      <img [hidden]="states['trim']" src="assets/circle_empty.svg">
+      <img [hidden]="!states['trim']" src="assets/circle_tick.svg">
+      Fixtures
+      <span class="car-option-selected">{{states['trim']}}</span>
+    </h3>
+
+    <div>
+      <div class="option-item top-option-item" (click)="select('trim', 'standard')">
+        <div class="option-description">
+          <h2>Standard</h2>
+          <p>
+            Simple but elegant fixtures.
+          </p>
+        </div>
+        <ion-badge [hidden]="states['trim'] === 'standard'" item-right color="dark">Free</ion-badge>
+        <ion-badge [hidden]="states['trim'] !== 'standard'" item-right color="dark" class="selected"><img src="assets/tick.svg"></ion-badge>
+      </div>
+
+      <div class="option-item" (click)="select('trim', 'executive')">
+        <div class="option-description">
+          <h2>Modern</h2>
+          <p>
+            Sleek and upgraded house fixtures.
+          </p>
+        </div>
+        <ion-badge [hidden]="states['trim'] === 'executive'" item-right color="dark">+$1450</ion-badge>
+        <ion-badge [hidden]="states['trim'] !== 'executive'" item-right color="dark" class="selected"><img src="assets/tick.svg"></ion-badge>
+      </div>
+    </div>
+  </ion-card>
+
+  <ion-card class="animatedCard" [class.expandedCard]="selected === 'colour'">
+    <h3 class="car-option" (click)="open('colour')">
+      <img [hidden]="states['colour']" src="assets/circle_empty.svg">
+      <img [hidden]="!states['colour']" src="assets/circle_tick.svg">
+      Interior Paint Color
+      <span class="car-option-selected">{{states['colour']}}</span>
+    </h3>
+
+    <div class="option-colours">
+      <div class="option-colour" (click)="select('colour', 'sunburst orange')" [ngClass]="{selected: states['colour'] === 'sunburst orange'}">
+        <div class="option-colour-preview sunburst"></div>
+        <h4>Taupe</h4>
+      </div>
+
+      <div class="option-colour" (click)="select('colour', 'inferno red')" [ngClass]="{selected: states['colour'] === 'inferno red'}">
+        <div class="option-colour-preview red"></div>
+        <h4>Dark Berry</h4>
+      </div>
+
+      <div class="option-colour" (click)="select('colour', 'royal purple')" [ngClass]="{selected: states['colour'] === 'royal purple'}">
+        <div class="option-colour-preview purple"></div>
+        <h4>Harvest</h4>
+      </div>
+
+      <div class="option-colour" (click)="select('colour', 'alpine green')" [ngClass]="{selected: states['colour'] === 'alpine green'}">
+        <div class="option-colour-preview green"></div>
+        <h4>Pale Green</h4>
+      </div>
+
+      <div class="option-colour" (click)="select('colour', 'statement blue')" [ngClass]="{selected: states['colour'] === 'statement blue'}">
+        <div class="option-colour-preview blue"></div>
+        <h4>Demin</h4>
+      </div>
+
+      <div class="option-colour" (click)="select('colour', 'vibrant grape')" [ngClass]="{selected: states['colour'] === 'vibrant grape'}">
+        <div class="option-colour-preview grape"></div>
+        <h4>Shadow</h4>
+      </div>
+    </div>
+  </ion-card>
+
+  <ion-card class="animatedCard" [class.expandedCard]="selected === 'interior'">
+    <h3 class="car-option" (click)="open('interior')">
+      <img [hidden]="states['interior']" src="assets/circle_empty.svg">
+      <img [hidden]="!states['interior']" src="assets/circle_tick.svg">
+      Flooring
+      <span class="car-option-selected">{{states['interior']}}</span>
+    </h3>
+
+    <div class="option-interiors">
+      <div class="option-interior" (click)="select('interior', 'red rum')" [ngClass]="{selected: states['interior'] === 'red rum'}">
+        <div class="option-interior-preview red"></div>
+        <h4>Tuscan</h4>
+      </div>
+
+      <div class="option-interior" (click)="select('interior', 'papyrus')" [ngClass]="{selected: states['interior'] === 'papyrus'}">
+        <div class="option-interior-preview papyrus"></div>
+        <h4>Chestnut</h4>
+      </div>
+
+      <div class="option-interior" (click)="select('interior', 'rotor grey')" [ngClass]="{selected: states['interior'] === 'rotor grey'}">
+        <div class="option-interior-preview grey"></div>
+        <h4>Cork</h4>
+      </div>
+
+      <div class="option-interior" (click)="select('interior', 'noble brown')" [ngClass]="{selected: states['interior'] === 'noble brown'}">
+        <div class="option-interior-preview brown"></div>
+        <h4>Explosion</h4>
+      </div>
+    </div>
+  </ion-card>
+
+  <ion-card class="animatedCard" [class.expandedCard]="selected === 'extras'">
+    <h3 class="car-option" (click)="open('extras')">
+      <img [hidden]="states['extras']" src="assets/circle_empty.svg">
+      <img [hidden]="!states['extras']" src="assets/circle_tick.svg">
+      Extras
+      <span class="car-option-selected">{{getExtras()}}</span>
+    </h3>
+
+    <div>
+      <div class="option-item top-option-item" (click)="select('extras', 'granite countertops')">
+        <div class="option-description">
+          <h2>Granite Countertops</h2>
+          <p>
+            Total piece of mind for the perfect product experience.
+          </p>
+        </div>
+        <ion-badge [hidden]="containsExtra('granite countertops')" item-right color="dark">+$1150</ion-badge>
+        <ion-badge [hidden]="!containsExtra('granite countertops')" item-right color="dark" class="selected"><img src="assets/tick.svg"></ion-badge>
+      </div>
+
+      <div class="option-item" (click)="select('extras', 'smart home package')">
+        <div class="option-description">
+          <h2>Smart Home Package</h2>
+          <p>
+            A complete smarthome installation.
+          </p>
+        </div>
+        <ion-badge [hidden]="containsExtra('smart home package')" item-right color="dark">+$1450</ion-badge>
+        <ion-badge [hidden]="!containsExtra('smart home package')" item-right color="dark" class="selected"><img src="assets/tick.svg"></ion-badge>
+      </div>
+    </div>
+  </ion-card>
+
+  <ion-card (click)="purchase()">
+    <button ion-button color="secondary">Purchase <img src="assets/arrow_right.svg"></button>
+  </ion-card>
+</ion-content>
